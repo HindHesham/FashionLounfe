@@ -1,4 +1,4 @@
-# fashion lounge
+# Fashion Lounge
 
 Mobile application makes you to upload and download fashion designs, make comment, like and select it as favourite.
 every user has own account so users can follow each others.
