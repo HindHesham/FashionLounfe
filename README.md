@@ -8,6 +8,6 @@ Mobile Application for fashion designs makes you to  upload and download designs
 
 ## Installation:
 - clone repo
-- run command “ nom install “
+- run command “ npm install “
 - for serve “ ionic serve” / or “ onic cordova run android “ for run in device.
 
