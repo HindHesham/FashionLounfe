@@ -1,0 +1,67 @@
+<ion-header >
+    <ion-navbar color="primary" >
+      <ion-title>
+        Sales
+      </ion-title>
+    </ion-navbar>
+  </ion-header>
+
+<ion-content padding>
+    <div id="mainDiv">
+        <div class="searchIconsDiv">
+            <button  ion-button round outline class="salesBtn" (click)="filterSalesPosts('25%')">25%</button>    
+            <button  ion-button round outline class="salesBtn" (click)="filterSalesPosts('50%')">50%</button> 
+            <button ion-button round outline class="salesBtn"  (click)="filterSalesPosts('75%')">75%</button>    
+            <button  ion-button round outline class="salesBtn"  (click)="filterSalesPosts('100%')">100%</button> 
+        </div>
+        
+        <div class="searchClickResult">
+  
+        </div>
+      </div>
+
+    <ion-list>
+
+      <h4 *ngIf="isEmptyArray == 'true'" class="noContent" id="noContent">There is no posts for this sale</h4>
+
+      <ion-item *ngFor="let post of postsData" (click)="gotoPostDetails($event,post.id,post.user.name, post.user.tokens)">
+        <img *ngIf="post.photo != null && post.isBase64 == 'false'" src="http://www.fashion.fatimabalhaddad.com/public/images/posts/{{post.photo}}" style="width:25%; height:70px;" item-start/>
+        <img *ngIf="post.photo != null && post.isBase64 == 'true'" src="{{post.photo}}" style="width:25%; height:70px;" item-start/>        
+        <img *ngIf="post.photo == null" src="assets/avatar.png" style="width:25%; height:70px;" item-start/>        
+        <h6 style="font-size: 11px; margin-top:7%; font-weight:bold" (click)="gotoUserProfile($event,post.user.id)">{{post.user.name}}</h6>
+        <p style="padding-top:7%; margin-top:1px">{{post.content}}</p>
+        <div item-end class="readMoreDiv">
+          <ion-icon name="md-more" item-end class="moreBtn" style="color: white"> </ion-icon>
+          <p class="details">Read More</p>              
+        </div>
+      </ion-item>
+    </ion-list>
+
+    <ion-infinite-scroll *ngIf="sale_type != 'none'" (ionInfinite)="$event.waitFor(doInfinite())">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar  color="primary">
+      <div class="mainFooterIconsDiv">
+          <ion-buttons class="iconContaine">
+              <button ion-button icon-only (click)="gotoHome();"><ion-icon name="ios-home-outline" ></ion-icon></button>
+            </ion-buttons>
+            <ion-buttons class="iconContaine">
+              <button ion-button icon-only (click)="gotoAddSearchPage();"><ion-icon name="ios-search-outline"></ion-icon></button>
+            </ion-buttons>
+            
+            <ion-buttons class="iconContaine">
+              <button ion-button icon-only (click)="gotoAddPost();"><ion-icon name="ios-add-circle"></ion-icon></button>
+            </ion-buttons>
+            <ion-buttons class="iconContaine">
+              <button ion-button icon-only (click)="gotoFavourites();"><ion-icon name="ios-heart-outline"></ion-icon></button>
+            </ion-buttons>
+            <ion-buttons class="iconContaine">
+              <button ion-button icon-only (click)="gotoProfile();"><ion-icon name="ios-person-outline"></ion-icon></button>
+            </ion-buttons>
+      </div>
+    </ion-toolbar>
+  </ion-footer>

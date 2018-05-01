@@ -1,0 +1,41 @@
+
+<ion-header>
+
+  <ion-navbar color="primary" >
+    <ion-title>comments</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="outer-content">
+    
+  <ion-list class="chat-sliding-demo">
+    <ion-item-sliding #item>
+      <ion-item class="commentItem" *ngFor="let comment of listComments()">
+        <ion-avatar item-start>
+          <img *ngIf="comment.user.photo != null && comment.user.isBase64=='false'" src="http://www.fashion.fatimabalhaddad.com/public/images/users/{{comment.user.photo}}">
+          <img *ngIf="comment.user.photo != null && comment.user.isBase64=='true'" src="{{comment.user.photo}}">          
+          <img *ngIf="comment.user.photo == null"  src="assets/avatar.png">          
+        </ion-avatar>
+        <h3>{{comment.user.name}}</h3>
+        <p text-wrap>{{comment.content}}</p>
+        <ion-note item-end>
+          {{comment.since}}
+        </ion-note>
+      </ion-item>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>
+
+<ion-footer >
+  <ion-item class="sendCommentDiv" no-lines>
+    <ion-icon ios="ios-send" md="md-send" item-end color="primary" (click)="addComment(comment.value)"></ion-icon> 
+    <ion-input placeholder="send comment" #comment></ion-input>
+   </ion-item>
+</ion-footer>

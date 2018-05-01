@@ -1,0 +1,35 @@
+page-full-size-download-manican {
+    ion-content{ 
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: inherit;
+        background-position: center;
+    }
+    .manicanImg{
+        width: 100%;
+        height: 100%
+        //margin-top: 3%;
+    }
+    .closeBtn{
+       
+        display: flex;
+        position: absolute;
+        top: 2%;
+    }
+    .closeButtonBtn{
+        background-color: inherit;
+    }
+    .closeButtonBtn:active{
+        background-color: inherit;
+    }
+    .downloadBtn{
+        width:60%;
+        display: flex;
+        position: absolute;
+        bottom: 5%;
+        margin-left:20%;
+    }
+    .downloadBtn button{
+        width: 100%;
+    }
+}

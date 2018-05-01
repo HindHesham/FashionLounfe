@@ -1,0 +1,154 @@
+page-user-profile {
+    .profileImg{
+        width:100%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: inherit;
+        background-position: center;
+    }
+    #mainDiv {
+        width: 89%;
+        height: 100%;
+       margin: 0 auto;
+       }
+    .details{
+        border: 1px solid black;
+        width:100%;
+        height: 20%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        position:relative;
+        bottom: 5%;
+        padding: 1%;
+    }
+    .nameWhite{
+        //background-color: gray;
+        //opacity: .5;
+         color:white;
+         font-weight: normal;
+         position: absolute;
+         top: 42%;
+         margin-left: 5%;
+         font-size: 12px;
+         font-weight: bold;
+     }
+     .nameBlack{
+       
+        color:black;
+        font-weight: normal;
+        position: absolute;
+        top: 42%;
+        margin-left: 5%;
+        font-size: 12px;
+        font-weight: bold;
+    }
+    .editIcon{
+       // border:1px solid red;
+        border-radius: 50%;
+        height: 100%;
+        width:11%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: inherit;
+        background-position: center;
+    }
+    .tabsDiv{
+        //border: 1px solid black;
+        width: 100%;
+        height: 55%;
+        position: relative;
+    }
+    .tabs-ios .tab-button.has-title-only .tab-button-text{
+        font-size: x-small;
+    }
+    .postCard {
+        border: 2px solid rgba(211, 211, 211, .5);
+        //border-radius: 12px;
+        width: 100%;
+        margin: 0 auto 5%;
+      }
+   .postDate{
+       -webkit-text-fill-color: gray;
+   }
+
+   .postImg{
+       width: 100%;
+       height: 200px;
+       position: relative;
+       display: flex;
+       align-items: start;
+       
+   }  
+   .hr {
+       border-bottom: 1px solid #ccc;
+       margin: 10px 0 0 5%;
+       width: 90%;
+   }
+   
+   .normalTxtWeight {
+       font-weight: normal;
+       font-size: 12px;
+   } 
+   .darkTxt {
+       color: black;
+       font-size: 10px;
+     }
+
+    .segment-md-primary .segment-button {
+       color: gray;
+       border-color: transparent;
+   }
+
+   .segment-md-primary .segment-button.activated, .segment-md-primary .segment-button.segment-activated {
+       border-color: transparent;
+   }
+  
+   .profilePicItem{
+       //border:1px solid black;
+       width: 98%;
+       height: 55%;
+       margin: 0 auto;
+   }
+   .imageItem{
+       //border: 1px solid black;
+       height: 85%
+   }
+   
+   .profilePicItem img{
+       width: 100%;
+       height: 100%;
+   }        
+   .item
+   {
+       padding-left: 0;
+   }
+
+   .item-md.item-block .item-inner,
+   .item-ios.item-block .item-inner
+   {
+       padding-right: 0
+   }
+   .label{
+       margin: 0;
+      // height: 100%;
+   }
+   .fabClass{
+    position: absolute;
+    top:38.5%;
+    right:8%;
+    }
+   .segmentItem .label{
+       height: 100%;
+   }
+   #followBtnBackground,
+   #unFollowBtnBackground
+   {
+       height: 2.4em;
+       top:39%
+   }
+}

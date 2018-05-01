@@ -1,0 +1,59 @@
+<ion-header >
+
+  <ion-navbar color="primary">
+    <ion-title>{{user_name}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content >
+    <ion-card *ngFor="let post of postDetails">
+        
+        <ion-item>
+          <ion-avatar item-start (click)="gotoUserProfile(post.user.id)">
+            <img class="imgDiv" *ngIf="post.user.photo!=null && post.user.isBase64 == 'false'" src="http://www.fashion.fatimabalhaddad.com/public/images/users/{{post.user.photo}}">
+            <img class="imgDiv" *ngIf="post.user.photo!=null && post.user.isBase64 == 'true'" src="{{post.user.photo}}">      
+            <img class="imgDiv" *ngIf="post.user.photo==null"  src="assets/avatar.png">
+          </ion-avatar>
+          <h2>{{post.user.name}}</h2>
+          <p class="postDate">{{post.since}}</p>
+            <ion-buttons item-end *ngIf="user_token == current_token" (click)="presentPopoverMore($event,post.id)">
+                <button ion-button icon-only clear>
+                <ion-icon name="md-more" id="moreIcon" color="dark"></ion-icon>
+              </button>
+            </ion-buttons>
+        </ion-item>
+      
+        <img *ngIf="post.isBase64 == 'false'" src="http://www.fashion.fatimabalhaddad.com/public/images/posts/{{post.photo}}" class="postImg">
+        <img *ngIf="post.isBase64 == 'true'" src="{{post.photo}}" class="postImg">            
+      
+        <ion-card-content>
+          <h6>{{post.user.content}}</h6>
+        </ion-card-content>
+  
+        <div class="hr"> </div>
+        <ion-row>
+          <ion-col>
+            <button ion-button icon-left clear small (click)="addToLiked($event,post.id)">
+              <ion-icon *ngIf="post.isLike=='false'" name="ios-thumbs-up-outline" color="dark" ></ion-icon>
+              <ion-icon *ngIf="post.isLike=='true'" name="ios-thumbs-up" color="dark" ></ion-icon>   
+              <div class="darkTxt">{{post.like_count}} Likes</div>
+            </button>
+          </ion-col>
+          <ion-col>
+            <button ion-button icon-left clear small (click)="gotoComments(post.id)">
+              <ion-icon color="dark" name="ios-chatbubbles-outline"></ion-icon>
+              <div class="darkTxt">{{post.comment_count}} Comments</div>
+            </button>
+          </ion-col>
+          <ion-col >
+              <button ion-button icon-only clear small float-right (click)="addToFavourite($event,post.id)">
+                  <ion-icon *ngIf="post.isFavourite=='false'" name="ios-heart-outline" color="primary" (click)="addToFavourite($event,post.id)" class="heartIcon"></ion-icon>   
+                  <ion-icon *ngIf="post.isFavourite=='true'" name="ios-heart" color="primary" (click)="addToFavourite($event,post.id)" class="heartIcon"></ion-icon> 
+              </button>          
+        </ion-col>
+        </ion-row>
+
+      </ion-card>
+
+</ion-content>
+

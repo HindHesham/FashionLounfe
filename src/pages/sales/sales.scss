@@ -1,0 +1,75 @@
+page-sales {
+    .content {
+        //background-color: #f9f9f9;
+        background-color: #efefef;
+        font-size: x-small
+    }
+    .header .toolbar-background, .footer .toolbar-background{
+        border-style: solid;
+        border-color: transparent
+    }
+    #mainDiv{
+        width: 100%;
+    }
+
+    .searchClickResult{
+    // border: 1px solid red;
+        width:95%;
+        height: auto;
+        display: flex;
+        margin:0 auto;
+        align-content: center
+    }
+
+    .readMoreDiv {
+        text-align:right;
+    }
+
+    .moreBtn {
+        margin-right:0;
+        color: white;
+    }
+
+    .details{
+        color: #8649a5;
+    }
+
+    .label{
+        height: 90%
+    }
+    .item{
+        padding-left:11px;
+    }
+    .salesDiv{
+        position: fixed;
+        // border: 1px solid black;
+        background-color: rgba(0, 0, 0, 0.5);
+        height: 6%;
+        width: 14%;
+        right: 0;
+        margin-right: 12px;
+        text-align: center;
+    
+    }
+    .salesDiv p{
+        font-weight: bold;
+        color: white;
+        margin-top: 25%;
+        font-size: larger;
+    }
+    .salesBtn{
+        font-size: small;
+        font-weight: bold;
+        background-color: #8649a5;
+        color: white;
+        height: 40px;
+        padding: 0 2rem;
+        width:20%;
+    }
+    .searchIconsDiv{
+        text-align: center;
+    }
+    #noContent {
+        margin-top: 20%;
+    }
+}

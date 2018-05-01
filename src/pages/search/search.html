@@ -1,0 +1,63 @@
+<ion-header>
+    <ion-toolbar color="primary"> 
+        <ion-searchbar placeholder="search" [(ngModel)]="myInput" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)">
+        </ion-searchbar>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <div id="mainDiv">
+      <div class="searchIconsDiv">
+          <button *ngIf="firstTagPost != null" ion-button round outline (click)="setPostTags(firstTagPost)">{{firstTagPost}}</button>    
+          <button *ngIf="secondTagPost != null" ion-button round outline (click)="setPostTags(secondTagPost)">{{secondTagPost}}</button> 
+          <button *ngIf="ThirdTagPost != null" ion-button round outline (click)="setPostTags(ThirdTagPost)">{{ThirdTagPost}}</button>    
+          <button *ngIf="ForthTagPost != null" ion-button round outline (click)="setPostTags(ForthTagPost)">{{ForthTagPost}}</button> 
+      </div>
+      
+      <div class="searchClickResult">
+
+      </div>
+    </div>
+
+    <ion-list *ngIf="myInput != null">
+      <ion-item *ngFor="let post of listSearchPosts()" (click)="gotoPostDetails($event,post.id,post.user.name, post.user.tokens)">
+        <img *ngIf="post.user.photo != null && post.isBase64 == 'false'" src="http://www.fashion.fatimabalhaddad.com/public/images/posts/{{post.photo}}" style="width:25%; height:70px;" item-start/>
+        <img *ngIf="post.user.photo != null && post.isBase64 == 'true'" src="{{post.photo}}" style="width:25%; height:70px;" item-start/>        
+        <img *ngIf="post.user.photo == null" src="assets/avatar.png" style="width:25%; height:70px;" item-start/>        
+        <h6 style="font-size: 11px; margin-top:7%; font-weight:bold" (click)="gotoUserProfile($event,post.user.id)">{{post.user.name}}</h6>
+        <p style="padding-top:7%; margin-top:1px">{{post.content}}</p>
+        <div item-end class="readMoreDiv">
+          <ion-icon name="md-more" item-end (click)="presentPopoverMore($event, post.id)" class="moreBtn"> </ion-icon>
+          <p class="details">Read More</p>              
+        </div>
+      </ion-item>
+    </ion-list>
+
+    <ion-infinite-scroll *ngIf="search_type != 'none'" (ionInfinite)="$event.waitFor(doInfinite())">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar  color="primary">
+      <div class="mainFooterIconsDiv">
+          <ion-buttons class="iconContaine">
+              <button ion-button icon-only (click)="gotoHome();"><ion-icon name="ios-home-outline" ></ion-icon></button>
+            </ion-buttons>
+            <ion-buttons class="iconContaine">
+              <button ion-button icon-only ><ion-icon name="ios-search-outline"></ion-icon></button>
+            </ion-buttons>
+            
+            <ion-buttons class="iconContaine">
+              <button ion-button icon-only (click)="gotoAddPost();"><ion-icon name="ios-add-circle"></ion-icon></button>
+            </ion-buttons>
+            <ion-buttons class="iconContaine">
+              <button ion-button icon-only (click)="gotoFavourites();"><ion-icon name="ios-heart-outline"></ion-icon></button>
+            </ion-buttons>
+            <ion-buttons class="iconContaine">
+              <button ion-button icon-only (click)="gotoProfile();"><ion-icon name="ios-person-outline"></ion-icon></button>
+            </ion-buttons>
+      </div>
+    </ion-toolbar>
+  </ion-footer>

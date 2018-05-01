@@ -1,0 +1,185 @@
+<ion-header>
+  <ion-navbar color="primary" >
+    <ion-title>{{getProfileDetails().name}}</ion-title>
+    
+    <ion-buttons end style="padding-top:1%">
+      <button icon-only (click)="gotoSettings();" style="background-color:transparent">
+        <ion-icon name="ios-settings-outline"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content style="background-image: url('assets/bg_splash.svg');">
+
+  <div id="mainDiv" style="height: 100%; width: 90%;">
+
+    <ion-list class="profilePicItem"> 
+        <ion-item  class="imageItem" no-lines >
+            <img *ngIf="getProfileDetails().photo != null && getProfileDetails().isBase64=='false'" src="http://www.fashion.fatimabalhaddad.com/public/images/users/{{getProfileDetails().photo}}">
+            <img *ngIf="getProfileDetails().photo != null && getProfileDetails().isBase64=='true'" src="{{getProfileDetails().photo}}">          
+            <img *ngIf="getProfileDetails().photo == null" src="assets/avatar.png"/>    
+            
+        </ion-item>
+        <rating *ngIf="getProfileDetails().isCurrentUser == 'false'" class="ratingClass" no-padding no-mrgin [(ngModel)]="rate" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="saveUserRating($event)"></rating>
+        <rating *ngIf="getProfileDetails().isCurrentUser == 'true'" class="ratingClass" no-padding no-mrgin [(ngModel)]="rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="saveUserRating($event)"></rating>
+        
+        <ion-fab *ngIf="getProfileDetails().isCurrentUser == 'true'" right class= "fabClass" (click)="gotoAddProfileImage();">
+            <button ion-fab style="background-image:url('assets/profile/edit_icon.svg');background-size:cover">
+            </button>
+        </ion-fab>
+        <P class="nameWhite" *ngIf="getProfileDetails().photo != null">
+           {{getProfileDetails().name}}
+        </P>
+        <P class="nameBlack" *ngIf="getProfileDetails().photo == null">
+          {{getProfileDetails().name}}
+       </P>
+
+       <button id="followBtnBackground" *ngIf="isFollowerUser() == 'true' && getProfileDetails().isCurrentUser == 'false'"  ion-button item-end color="light" round right class= "fabClass" (click)="followUser(user_id)">UnFollow</button>
+       <button id="unFollowBtnBackground" *ngIf="isUnfollowerUser() == 'false' && getProfileDetails().isCurrentUser == 'false'" ion-button item-end color="primary" round right class= "fabClass" (click)="followUser(user_id)">Follow</button>  
+
+        <ion-item no-lines class="segmentItem">
+            <ion-segment [(ngModel)]="pageType" fixed color="primary" id="headerSegment" mode="md" >
+                <ion-segment-button value="POST">
+                    POST
+                </ion-segment-button>
+                <ion-segment-button value="FOLLOWERS">
+                  FOLLOWERS
+                </ion-segment-button>
+                <ion-segment-button value="FOLLOWING">
+                  FOLLOWING
+                </ion-segment-button>
+              </ion-segment>
+        </ion-item>
+    </ion-list>
+
+  
+    <div [ngSwitch]="pageType" style="margin-top: 30px;"> 
+
+      <!------------------ POST SEGMENT ---------------->
+      <div *ngSwitchCase="'POST'">
+          <h4 *ngIf="listUserPosts().length == 0" class="noContent">There is no posts</h4>
+          
+          <ion-card *ngIf="listUserPosts().length > 0">
+          <ion-card *ngFor="let post of listUserPosts()" class="postCard">
+            
+            <ion-item style="padding-left:9px;">
+              <ion-avatar *ngIf="post.photo!=null"  item-start>
+                <img *ngIf="getProfileDetails().isBase64=='true'" src="{{getUserPhoto()}}">
+                
+                <img *ngIf="getProfileDetails().isBase64=='false'" src="http://www.fashion.fatimabalhaddad.com/public/images/users/{{getUserPhoto()}}" />
+                
+              </ion-avatar>
+              <ion-avatar *ngIf="post.photo==null" item-start>
+                  <img src="assets/avatar.png">
+                </ion-avatar>
+              <h2>{{getUserName()}}</h2>
+              <p class="postDate">{{post.since}}</p>
+                <ion-buttons item-end *ngIf="getProfileDetails().isCurrentUser != 'false'" (click)="presentPopoverMore($event,post.id)">
+                    <button ion-button icon-only clear>
+                  </button>
+                </ion-buttons>
+            </ion-item>
+        
+            <img *ngIf="post.isBase64=='false'" src="http://www.fashion.fatimabalhaddad.com/public/images/posts/{{post.photo}}" (click)="PostDetailsPage(post.id)" class="postImg">
+            <img *ngIf="post.isBase64=='true'" src="{{post.photo}}" (click)="PostDetailsPage(post.id)" class="postImg">
+          <ion-card>
+            <ion-card-content>
+                <span class="normalTxtWeight">{{post.content}}</span>
+            </ion-card-content>
+        
+            <div class="hr"> </div>
+        
+            <ion-row>
+              <ion-col>
+                <button ion-button icon-left clear small (click)="addToLiked($event,post.id)">           
+                  <ion-icon *ngIf="post.isLike=='false'" name="ios-thumbs-up-outline" color="dark" ></ion-icon> 
+                  <ion-icon *ngIf="post.isLike=='true'" name="ios-thumbs-up" color="dark" ></ion-icon> 
+                  <div class="darkTxt">{{post.like_count}} Likes</div>    
+                </button>
+              </ion-col>
+              <ion-col>
+                <button ion-button icon-left clear small (click)="gotoComments(post.id)">
+                  <ion-icon color="dark" name="ios-chatbubbles-outline"></ion-icon>
+                  <div class="darkTxt">{{post.comment_count}} Comments</div>
+                </button>
+              </ion-col>
+              <ion-col>
+                  <button ion-button icon-only clear small float-right (click)="addToFavourite($event,post.id)">               
+                    <ion-icon *ngIf="post.isFavourite=='false'" name="ios-heart-outline" color="primary"></ion-icon>   
+                    <ion-icon *ngIf="post.isFavourite=='true'" name="ios-heart" color="primary"></ion-icon>
+                  </button>
+                </ion-col>
+              </ion-row>
+            </ion-card>
+          </ion-card>
+        </ion-card>
+      </div>   
+
+      <!------------------ FOLLOWERS SEGMENT ---------------->
+      <div *ngSwitchCase="'FOLLOWERS'">
+          <h4 *ngIf="listUserFollowers().length == 0" class="noContent">There is no followers</h4>
+          
+          <ion-list *ngIf="listUserFollowers().length > 0">
+              <ion-item *ngFor="let follower of listUserFollowers()">
+                  <ion-avatar item-start (click)="gotoUserProfile(follower.id)">
+                      <img *ngIf="follower.photo != null && follower.isBase64=='false'"  src="http://www.fashion.fatimabalhaddad.com/public/images/users/{{follower.photo}}">
+                      <img *ngIf="follower.photo != null && follower.isBase64=='true'"  src="{{follower.photo}}">                                      
+                      <img *ngIf="follower.photo == null"  src="assets/profile_icon.svg">
+                  </ion-avatar>
+                  <p (click)="gotoUserProfile(follower.id)">{{follower.name}}</p>
+                  <button *ngIf="follower.follow == 'true'" ion-button item-end color="light" round (click)="followUser(follower.id)">UnFollow</button>
+                  <button *ngIf="follower.follow == 'false'" ion-button item-end color="primary" round (click)="followUser(follower.id)">Follow</button>            
+              </ion-item>
+          </ion-list>  
+      </div>
+
+      <!------------------ FOLLOWINGS SEGMENT ---------------->
+      <div *ngSwitchCase="'FOLLOWING'">
+        <h4 *ngIf="listUserFollowing().length == 0" class="noContent">There is no followings</h4>
+      
+        <ion-list *ngIf="listUserFollowing().length > 0">
+          <ion-item *ngFor="let following of listUserFollowing()">
+              <ion-avatar item-start (click)="gotoUserProfile(following.id)">
+                <img *ngIf="following.photo != null && following.isBase64=='false'"  src="http://www.fashion.fatimabalhaddad.com/public/images/users/{{following.photo}}">
+                <img *ngIf="following.photo != null && following.isBase64=='true'"  src="{{following.photo}}">                
+                <img *ngIf="following.photo == null"  src="assets/profile_icon.svg">
+              </ion-avatar>
+              <p (click)="gotoUserProfile(following.id)">{{following.name}}</p>
+              <button *ngIf="following.follow == 'true'" ion-button item-end color="light" round (click)="followUser(following.id)" style="color:black;">UnFollow</button>
+              <button *ngIf="following.follow == 'false'" ion-button item-end color="primary" round (click)="followUser(following.id)">Follow</button>    
+          </ion-item>
+        </ion-list>
+      </div>
+
+    </div>
+
+  </div>
+  
+  <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar  color="primary">
+      <div class="mainFooterIconsDiv">
+          <ion-buttons class="iconContaine">
+              <button ion-button icon-only (click)="gotoHome();"><ion-icon name="ios-home-outline"></ion-icon></button>
+            </ion-buttons>
+            <ion-buttons class="iconContaine">
+              <button ion-button icon-only (click)="gotoSearch();"><ion-icon name="ios-search-outline"></ion-icon></button>
+            </ion-buttons>
+            
+            <ion-buttons class="iconContaine">
+              <button ion-button icon-only (click)="gotoAddPost();"><ion-icon name="ios-add-circle"></ion-icon></button>
+            </ion-buttons>
+            <ion-buttons class="iconContaine">
+              <button ion-button icon-only (click)="gotoFavourites();"><ion-icon name="ios-heart-outline"></ion-icon></button>
+            </ion-buttons>
+            <ion-buttons class="iconContaine">
+              <button ion-button icon-only (click)="gotoProfile()"><ion-icon name="ios-person-outline"></ion-icon></button>
+            </ion-buttons>
+      </div>
+    </ion-toolbar>
+</ion-footer>

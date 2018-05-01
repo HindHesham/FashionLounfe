@@ -1,0 +1,8 @@
+{
+  "name": "fashion",
+  "app_id": "575dd774",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "name": "fashion",
+  "version": "0.0.1",
+  "author": "Ionic Framework",
+  "homepage": "http://ionicframework.com/",
+  "private": true,
+  "scripts": {
+    "clean": "ionic-app-scripts clean",
+    "build": "ionic-app-scripts build",
+    "lint": "ionic-app-scripts lint",
+    "ionic:build": "ionic-app-scripts build",
+    "ionic:serve": "ionic-app-scripts serve"
+  },
+  "dependencies": {
+    "@angular/common": "4.4.3",
+    "@angular/compiler": "4.4.3",
+    "@angular/compiler-cli": "4.4.3",
+    "@angular/core": "4.4.3",
+    "@angular/forms": "4.4.3",
+    "@angular/http": "4.4.3",
+    "@angular/platform-browser": "4.4.3",
+    "@angular/platform-browser-dynamic": "4.4.3",
+    "@ionic-native/base64-to-gallery": "^4.5.2",
+    "@ionic-native/camera": "^4.4.2",
+    "@ionic-native/core": "4.3.0",
+    "@ionic-native/crop": "^4.5.2",
+    "@ionic-native/device": "^4.4.2",
+    "@ionic-native/facebook": "^4.4.2",
+    "@ionic-native/fcm": "^4.4.2",
+    "@ionic-native/file": "^4.5.2",
+    "@ionic-native/file-transfer": "^4.5.2",
+    "@ionic-native/in-app-browser": "^4.4.2",
+    "@ionic-native/native-storage": "^4.4.2",
+    "@ionic-native/photo-library": "^4.4.2",
+    "@ionic-native/splash-screen": "4.3.0",
+    "@ionic-native/status-bar": "4.3.0",
+    "@ionic-native/transfer": "^3.14.0",
+    "@ionic-native/twitter-connect": "^4.5.2",
+    "@ionic/storage": "^2.0.1",
+    "cordova-android": "^6.3.0",
+    "cordova-base64-to-gallery": "^4.1.3",
+    "cordova-ios": "4.5.3",
+    "cordova-plugin-camera": "^2.4.1",
+    "cordova-plugin-canvas2image": "git+https://github.com/devgeeks/Canvas2ImagePlugin.git",
+    "cordova-plugin-compat": "^1.2.0",
+    "cordova-plugin-crop": "^0.4.0",
+    "cordova-plugin-device": "^1.1.7",
+    "cordova-plugin-facebook4": "^1.9.1",
+    "cordova-plugin-fcm": "^2.1.2",
+    "cordova-plugin-file": "^4.3.3",
+    "cordova-plugin-file-transfer": "^1.7.0",
+    "cordova-plugin-ionic-webview": "^1.1.16",
+    "cordova-plugin-photo-library": "^2.1.0",
+    "cordova-plugin-splashscreen": "^4.1.0",
+    "cordova-plugin-statusbar": "git+https://github.com/apache/cordova-plugin-statusbar.git",
+    "cordova-plugin-whitelist": "^1.3.3",
+    "ionic-angular": "3.7.1",
+    "ionic-plugin-keyboard": "^2.2.1",
+    "ionicons": "3.0.0",
+    "ng2-img-cropper": "^0.9.0",
+    "ng2-twitter": "^0.3.0",
+    "org.devgeeks.Canvas2ImagePlugin": "https://github.com/devgeeks/Canvas2ImagePlugin.git",
+    "promise-polyfill": "6.1.0",
+    "rxjs": "5.4.3",
+    "sw-toolbox": "3.6.0",
+    "twitter-connect-plugin": "git+https://github.com/chroa/twitter-connect-plugin.git",
+    "zone.js": "0.8.18"
+  },
+  "devDependencies": {
+    "@ionic/app-scripts": "3.0.0",
+    "@ionic/cli-plugin-cordova": "1.6.2",
+    "@ionic/cli-plugin-ionic-angular": "1.4.1",
+    "typescript": "2.3.4"
+  },
+  "description": "An Ionic project",
+  "cordova": {
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "plugins": {
+      "ionic-plugin-keyboard": {},
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-device": {},
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-ionic-webview": {},
+      "cordova-plugin-camera": {},
+      "cordova-plugin-facebook4": {
+        "APP_ID": "110501653065207",
+        "APP_NAME": "fashion lounge"
+      },
+      "cordova-plugin-fcm": {},
+      "twitter-connect-plugin": {
+        "FABRIC_KEY": "ddb30e3efa7732b38e327c75a3ce57fd4c688ee1",
+        "TWITTER_KEY": "64NggyAee4udBTUs8pnC5i5Qj",
+        "TWITTER_SECRET": "JRLlIHkpfQ9a3p27bUbTeji2edBzhWS2REbBWkjergmmGy2Eby"
+      },
+      "cordova-base64-to-gallery": {},
+      "org.devgeeks.Canvas2ImagePlugin": {},
+      "cordova-plugin-file-transfer": {},
+      "cordova-plugin-photo-library": {
+        "PHOTO_LIBRARY_USAGE_DESCRIPTION": "To choose photos"
+      },
+      "cordova-plugin-file": {},
+      "cordova-plugin-crop": {}
+    }
+  }
+}

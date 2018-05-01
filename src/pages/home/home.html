@@ -1,0 +1,107 @@
+<ion-header >
+  <ion-navbar color="primary" hideBackButton="true" >
+    <div id="mainHeaderDiv">
+      <div id="rightIconDiv" (click)="gotoNotification();">
+        <ion-icon name="ios-notifications-outline" class="notificationIcon"></ion-icon>
+      </div>
+      <div id="titleDiv">
+        <p>Fashion Lounge</p>
+      </div>
+      <div id="leftIconDiv" (click)="gotoAddPost()">
+        <ion-icon name="ios-camera-outline"></ion-icon>
+      </div>
+    </div>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content refreshingSpinner="circles"></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-card *ngFor="let post of getAllPostsData()">
+    
+    <ion-item>
+      <ion-avatar item-start (click)="gotoUserProfile(post.user.id)">
+        <img *ngIf="post.user.photo!=null && post.user.isBase64 == 'false'" src="http://www.fashion.fatimabalhaddad.com/public/images/users/{{post.user.photo}}">
+        <img *ngIf="post.user.photo!=null && post.user.isBase64 == 'true'" src="{{post.user.photo}}">      
+        <img *ngIf="post.user.photo==null"  src="assets/avatar.png">
+      </ion-avatar>
+      <h2 (click)="gotoUserProfile(post.user.id)">{{post.user.name}}</h2>
+      <p class="postDate">{{post.since}}</p>
+        <ion-buttons item-end *ngIf="post.user.tokens == token" (click)="presentPopoverMore($event, post.id)">
+            <button ion-button icon-only clear>
+              <ion-icon name="md-more" id="moreIcon" color="dark"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-item>
+    <div>
+      <div *ngIf="post.sale != null" class="salesDiv" (click)="gotoSales()"> 
+        <p> {{post.sale}} </p>
+      </div>
+      <img *ngIf="post.isBase64=='false'" src="http://www.fashion.fatimabalhaddad.com/public/images/posts/{{post.photo}}" (click)="PostDetailsPage(post.id,post.user.name,post.user.tokens)" class="postImg">
+      <img *ngIf="post.isBase64=='true'"  src="{{post.photo}}" (click)="PostDetailsPage(post.id,post.user.name,post.user.tokens)" class="postImg">  
+
+    </div>
+     <ion-card>
+      
+
+  <ion-card-content>
+      <span class="normalTxtWeight">{{post.content}}</span>
+  </ion-card-content>
+
+  <div class="hr"> </div>
+
+  <ion-row>
+    <ion-col>
+      <button ion-button icon-left clear small (click)="addToLiked($event,post.id)">
+        <ion-icon *ngIf="post.isLike=='false'" name="ios-thumbs-up-outline" color="dark" ></ion-icon>
+        <ion-icon *ngIf="post.isLike=='true'" name="ios-thumbs-up" color="dark" ></ion-icon>        
+        <div class="darkTxt">{{post.like_count}} Likes</div>    
+      </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button icon-left clear small (click)="gotoComments(post.id)">
+        <ion-icon color="dark" name="ios-chatbubbles-outline"></ion-icon>
+        <div class="darkTxt">{{post.comment_count}} Comments</div>
+      </button>
+    </ion-col>
+    <ion-col>
+        <button ion-button icon-only clear small float-right (click)="addToFavourite($event,post.id)">
+          <ion-icon *ngIf="post.isFavourite=='false'" name="ios-heart-outline" color="primary"></ion-icon>   
+          <ion-icon *ngIf="post.isFavourite=='true'" name="ios-heart" color="primary"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+    </ion-card>
+  </ion-card>
+
+  <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar  color="primary">
+    <div class="mainFooterIconsDiv">
+      <ion-buttons class="iconContaine">
+        <button ion-button icon-only ><ion-icon name="ios-home-outline"></ion-icon></button>
+      </ion-buttons>
+      <ion-buttons class="iconContaine">
+        <button ion-button icon-only (click)="gotoSearch()"><ion-icon name="ios-search-outline"></ion-icon></button>
+      </ion-buttons>
+          
+      <ion-buttons class="iconContaine">
+        <button ion-button icon-only (click)="gotoAddPost()"><ion-icon name="ios-add-circle"></ion-icon></button>
+      </ion-buttons>
+      <ion-buttons class="iconContaine">
+        <button ion-button icon-only (click)="gotoFavourites()"><ion-icon name="ios-heart-outline"></ion-icon></button>
+      </ion-buttons>
+      <ion-buttons class="iconContaine">
+        <button ion-button icon-only (click)="gotoProfile()"><ion-icon name="ios-person-outline"></ion-icon></button>
+      </ion-buttons>
+    </div>
+  </ion-toolbar>
+</ion-footer>

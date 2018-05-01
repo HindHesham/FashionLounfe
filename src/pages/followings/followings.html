@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar color="primary" >
+      <ion-title>Followings</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+    <h4 *ngIf="listUserFollowing().length == 0" class="noContent">There is no followings</h4>
+    
+      <ion-list *ngIf="listUserFollowing().length > 0">
+        <ion-item *ngFor="let following of listUserFollowing()">
+            <ion-avatar item-start (click)="gotoUserProfile(following.id)">
+              <img *ngIf="following.photo != null && following.isBase64=='false'"  src="http://www.fashion.fatimabalhaddad.com/public/images/users/{{following.photo}}">
+              <img *ngIf="following.photo != null && following.isBase64=='true'"  src="{{following.photo}}">                
+              <img *ngIf="following.photo == null"  src="assets/profile_icon.svg">
+            </ion-avatar>
+            <p>{{following.name}}</p>
+            <button *ngIf="following.follow == 'true'" ion-button item-end color="light" round (click)="followUser(following.id)" style="color:black;">UnFollow</button>
+            <button *ngIf="following.follow == 'false'" ion-button item-end color="primary" round (click)="followUser(following.id)">Follow</button>    
+        </ion-item>
+      </ion-list>
+
+</ion-content>

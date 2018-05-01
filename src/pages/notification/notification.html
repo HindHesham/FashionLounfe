@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar color="primary" >
+      <ion-title>Notifications</ion-title>
+      <ion-buttons end>
+          <ion-icon name="ios-notifications-outline" class="notificationIcon"></ion-icon>
+      </ion-buttons>
+  </ion-navbar>
+</ion-header>
+  
+  
+<ion-content >
+
+  <h4 *ngIf="allNotifications.length == 0" class="noContent">There is no notifications</h4>
+  
+  <ion-list padding *ngIf="allNotifications.length > 0">
+    <ion-item *ngFor="let notification of ListNotifications()" (click)="gotoNotificationDetails($event, notification.data.title, notification.data.post_id, notification.data.username)">
+      <ion-avatar item-start>
+        <img *ngIf="notification.data.photo!=null && notification.data.isBase64 == 'false'"  src="http://www.fashion.fatimabalhaddad.com/public/images/users/{{notification.data.photo}}">
+        <img *ngIf="notification.data.photo!=null && notification.data.isBase64 == 'true'"  src="{{notification.data.photo}}">        
+        <img *ngIf="notification.data.photo==null"  src="assets/home/profile.svg">
+      </ion-avatar>
+      <h3>{{notification.data.title}}</h3>
+      <p text-wrap>{{notification.data.message}}</p>
+      <div item-end>
+        <ion-icon large name="close" class="endIcon" (click)="deleteNotification($event, notification.unique_id)"></ion-icon><br />
+        <h6 class="time">{{notification.since}}</h6>
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>
+  

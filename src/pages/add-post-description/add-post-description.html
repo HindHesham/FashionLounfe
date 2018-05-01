@@ -1,0 +1,32 @@
+
+<ion-header>
+
+  <ion-navbar color="primary">
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content style="background-image: url('assets/bg_splash.svg');">
+
+  <ion-list id="mainDiv" >
+    <form style="margin-top:20%; padding-top:10%">
+      <ion-row class="DescriptionRow">
+        <ion-item no-lines id="inputItem">
+          <ion-textarea type="text" placeholder="Description" #Description ></ion-textarea>
+        </ion-item>
+      </ion-row>
+      <div class="searchIconsDiv">
+          <button  ion-button round outline class="salesBtn" [ngStyle]="{'background-color': buttonColor1}" (click)="filterSalesPosts('25%')">25%</button>    
+          <button  ion-button round outline class="salesBtn" [ngStyle]="{'background-color': buttonColor2}" (click)="filterSalesPosts('50%')">50%</button> 
+          <button ion-button round outline class="salesBtn" [ngStyle]="{'background-color': buttonColor3}"  (click)="filterSalesPosts('75%')">75%</button>    
+          <button  ion-button round outline class="salesBtn" [ngStyle]="{'background-color': buttonColor4}"  (click)="filterSalesPosts('100%')">100%</button> 
+      </div>
+      <ion-row id="btnRow">
+        <ion-item no-lines >
+          <button ion-button round class="publishBtn" (click)="publish(Description.value);"> publish </button>
+        </ion-item>
+      </ion-row>
+    </form>
+  </ion-list>
+
+</ion-content>

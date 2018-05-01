@@ -1,0 +1,25 @@
+<ion-toolbar  color="primary">
+  <div class="mainFooterIconsDiv">
+      <ion-buttons class="iconContaine">
+          <button *ngIf="pageName!=home" ion-button icon-only><ion-icon name="ios-home-outline"></ion-icon></button>
+          <button *ngIf="pageName==home" ion-button icon-only (click)="gotoHome()"><ion-icon name="ios-home-outline"></ion-icon></button>          
+        </ion-buttons>
+        <ion-buttons class="iconContaine">
+          <button *ngIf="pageName!=search" ion-button icon-only><ion-icon name="ios-search-outline"></ion-icon></button>
+          <button *ngIf="pageName==search" ion-button icon-only (click)="gotoSearch()"><ion-icon name="ios-search-outline"></ion-icon></button>          
+        </ion-buttons>
+        
+        <ion-buttons class="iconContaine">
+          <button *ngIf="pageName!=manican" ion-button icon-only><ion-icon name="ios-add-circle"></ion-icon></button>
+          <button *ngIf="pageName==manican" ion-button icon-only (click)="gotoAddPost()"><ion-icon name="ios-add-circle"></ion-icon></button>          
+        </ion-buttons>
+        <ion-buttons class="iconContaine">
+          <button *ngIf="pageName!=favourite" ion-button icon-only><ion-icon name="ios-heart-outline"></ion-icon></button>
+          <button *ngIf="pageName==favourite" ion-button icon-only (click)="gotoFavourites()"><ion-icon name="ios-heart-outline"></ion-icon></button>          
+        </ion-buttons>
+        <ion-buttons class="iconContaine">
+          <button *ngIf="pageName!=profile" ion-button icon-only><ion-icon name="ios-person-outline"></ion-icon></button>
+          <button *ngIf="pageName==profile" ion-button icon-only (click)="gotoProfile()"><ion-icon name="ios-person-outline"></ion-icon></button>          
+        </ion-buttons>
+  </div>
+</ion-toolbar>
